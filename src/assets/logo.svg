@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="hatGradient" x1="16" y1="12" x2="48" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF7A3D" />
+      <stop offset="100%" stop-color="#FF5A1F" />
+    </linearGradient>
+    <filter id="softShadow" x="10" y="10" width="46" height="46" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#C94316" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <!-- Main Chef Hat Puffs -->
+    <path
+      d="M19 37C16.8 37 15 35.2 15 33C15 31.2 16.2 29.7 17.9 29.2C17.6 28.5 17.4 27.8 17.4 27C17.4 23.3 20.3 20.3 24 20.1C25 18 27.3 16.5 30 16.5C32.7 16.5 35 18 36 20.1C39.7 20.3 42.6 23.3 42.6 27C42.6 27.8 42.4 28.5 42.1 29.2C43.8 29.7 45 31.2 45 33C45 35.2 43.2 37 41 37H19Z"
+      fill="url(#hatGradient)"
+      stroke="#C94316"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
+
+    <!-- Vertical Pleat Creases -->
+    <path d="M25 24C25.5 28 25.5 32 25 36" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-opacity="0.6"/>
+    <path d="M30 21C30 26 30 31 30 36" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" stroke-opacity="0.7"/>
+    <path d="M35 24C34.5 28 34.5 32 35 36" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round" stroke-opacity="0.6"/>
+
+    <!-- Hat Base Band -->
+    <rect x="18" y="38" width="24" height="5" rx="1.5" fill="#FF5A1F" stroke="#C94316" stroke-width="1.8"/>
+    <line x1="21" y1="40.5" x2="39" y2="40.5" stroke="#FFF0D9" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- Green Leaf Accent on Right -->
+    <path
+      d="M44 32C47 28 51 28 53 29C53 32 50 36 46 36C45 36 44.5 35.5 44 35L44 32Z"
+      fill="#4F8A43"
+      stroke="#3A6A32"
+      stroke-width="1.2"
+    />
+    <path d="M44 34C47 33 49 32 51 30" stroke="#FFFFFF" stroke-width="0.8" stroke-linecap="round" stroke-opacity="0.7"/>
+  </g>
+</svg>

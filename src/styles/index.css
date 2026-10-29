@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF8EC;
+    color: #382216;
+    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  }
+  
+  body {
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #FFF8EC;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #F0DCC2;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FF5A1F;
+  }
+}
+
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 16px);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Ambient glow utilities */
+.ambient-glow-orange {
+  box-shadow: 0 8px 24px -4px rgba(255, 90, 31, 0.35);
+}
+
+.ambient-glow-yellow {
+  box-shadow: 0 8px 20px -4px rgba(246, 201, 77, 0.35);
+}
+
+.card-elevation-1 {
+  background-color: #FFFFFF;
+  border: 1px solid #F0DCC2;
+  box-shadow: 0 4px 16px -2px rgba(56, 34, 22, 0.06), 0 2px 6px -1px rgba(56, 34, 22, 0.04);
+}
+
+.card-elevation-2 {
+  background-color: #FFFFFF;
+  border: 1px solid #F0DCC2;
+  box-shadow: 0 8px 24px -4px rgba(56, 34, 22, 0.1), 0 4px 12px -2px rgba(255, 90, 31, 0.12);
+}
+
+/* Floating order bar pulse */
+@keyframes soft-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 2.5s ease-in-out infinite;
+}
+
+/* Steam keyframe for hero biryani */
+@keyframes steam-drift {
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(-8px) scale(1.08) rotate(2deg);
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-16px) scale(1.15) rotate(-1deg);
+    opacity: 0;
+  }
+}
+
+.animate-steam {
+  animation: steam-drift 3.5s ease-out infinite;
+}
+
+/* Gentle float animation */
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-float {
+  animation: float-gentle 3s ease-in-out infinite;
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
