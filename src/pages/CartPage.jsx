@@ -5,7 +5,7 @@ import { restaurant } from '../data/restaurant';
 import DietaryBadge from '../components/DietaryBadge';
 import ClearCartModal from '../components/ClearCartModal';
 
-export default function CartPage({ onShowWaiterModal }) {
+export default function CartPage({ onShowSummary }) {
   const {
     cart,
     updateQuantity,
@@ -32,13 +32,11 @@ export default function CartPage({ onShowWaiterModal }) {
       <div className="flex flex-col w-full max-w-lg mx-auto">
         {cart.length > 0 ? (
           <>
-            {/* Table Badge & Dine-in Context Bar */}
+            {/* Dine-in Context Bar */}
             <div className="px-4 pt-2 pb-2 flex items-center justify-between">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FFF0D9] rounded-full border border-[#F0DCC2] text-xs font-semibold text-[#382216]">
                 <span className="material-symbols-outlined text-[15px] text-[#FF5A1F]">restaurant</span>
                 <span>{restaurant.diningContext}</span>
-                <span className="w-1 h-1 rounded-full bg-[#806A58]" />
-                <span className="text-[#C94316] font-bold">{restaurant.tableLabel}</span>
               </div>
 
               <button
@@ -194,7 +192,7 @@ export default function CartPage({ onShowWaiterModal }) {
                     <span className="text-sm font-bold text-[#382216] block">
                       Total
                     </span>
-                    <span className="text-[11px] text-[#806A58]">Payable at table</span>
+                    <span className="text-[11px] text-[#806A58]">Total Payable</span>
                   </div>
                   <div className="text-right">
                     <span className="text-xl font-extrabold text-[#FF5A1F] block">
@@ -205,19 +203,19 @@ export default function CartPage({ onShowWaiterModal }) {
               </div>
             </div>
 
-            {/* Primary Action Area: Show to Waiter Button */}
+            {/* Primary Action Area: Order Summary Button */}
             <div className="px-4 mt-5 flex flex-col gap-2">
               <button
                 type="button"
-                id="show-waiter-btn"
-                onClick={onShowWaiterModal}
+                id="view-summary-btn"
+                onClick={onShowSummary}
                 className="w-full bg-[#FF5A1F] hover:bg-[#C94316] text-white text-base font-bold py-3.5 px-6 rounded-full shadow-[0_8px_24px_rgba(255,90,31,0.35)] flex items-center justify-center gap-2 active:scale-[0.98] transition-all cursor-pointer"
               >
-                <span className="material-symbols-outlined text-[20px]">notifications_active</span>
-                <span>Show to Waiter</span>
+                <span className="material-symbols-outlined text-[20px]">receipt_long</span>
+                <span>View Order Summary</span>
               </button>
               <p className="text-[11px] text-center text-[#806A58] px-4 leading-relaxed">
-                Present this screen to your server to immediately fire your order to the kitchen.
+                Review your order summary and itemized breakdown.
               </p>
             </div>
           </>

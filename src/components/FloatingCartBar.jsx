@@ -25,7 +25,7 @@ export default function FloatingCartBar({ bottomOffset = 'bottom-16' }) {
               View Cart ({totalItems} {totalItems === 1 ? 'item' : 'items'})
             </span>
             <span className="text-[11px] font-medium text-[#FFF0D9] truncate">
-              {restaurant.tableLabel} • {restaurant.diningContext}
+              {restaurant.diningContext}
             </span>
           </div>
         </div>

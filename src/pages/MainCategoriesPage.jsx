@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { categories, dishes } from '../data/menu';
-import { restaurant } from '../data/restaurant';
 import CategoryCard from '../components/CategoryCard';
 import FloatingCartBar from '../components/FloatingCartBar';
 import heroBiryaniImg from '../assets/images/hero_biryani.jpg';
 
-export default function MainCategoriesPage({ onShowTableInfo }) {
+export default function MainCategoriesPage() {
   const [activeFilter, setActiveFilter] = useState('all'); // 'all', 'veg', 'non-veg', 'special'
 
   // Filter categories if user picks Pure Veg, Non-Veg, or Chef's Special
@@ -18,37 +17,27 @@ export default function MainCategoriesPage({ onShowTableInfo }) {
   return (
     <main className="flex flex-col relative w-full pt-16 pb-24 bg-[#FFF8EC] min-h-screen">
       <div className="flex flex-col w-full max-w-lg mx-auto">
-        {/* Cozy Greeting Banner (Matching Screen 2 in reference image) */}
+        {/* Cozy Greeting Banner */}
         <div className="px-4 pt-2 pb-2">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#FFF0D9] to-[#FFFFFF] p-3 border border-[#F0DCC2] shadow-[0_4px_16px_rgba(56,34,22,0.06)] flex items-center justify-between gap-3">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#FFF0D9] to-[#FFFFFF] p-3 border border-[#F0DCC2] shadow-[0_4px_16px_rgba(56,34,22,0.06)] flex items-center gap-3">
             {/* Left Vignette Photo */}
             <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm border border-[#F0DCC2]">
               <img
                 src={heroBiryaniImg}
-                alt="Cozy restaurant dining"
+                alt="Cozy dining"
                 className="w-full h-full object-cover"
               />
             </div>
 
             {/* Center Tagline */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1 text-[#382216]">
-                <span className="font-script text-lg sm:text-xl font-bold leading-tight">
+              <div className="flex items-center gap-1.5 text-[#382216]">
+                <span className="font-script text-xl sm:text-2xl font-bold leading-tight">
                   Good Food Brings People Together
                 </span>
-                <span className="text-[#C94316] text-sm">♥</span>
+                <span className="text-[#C94316] text-base">♥</span>
               </div>
             </div>
-
-            {/* Right: Orange Table Pill Badge */}
-            <button
-              type="button"
-              onClick={onShowTableInfo}
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#FF5A1F] text-white text-xs font-bold shadow-sm active:scale-95 transition-transform shrink-0 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[14px]">table_restaurant</span>
-              <span>{restaurant.tableLabel}</span>
-            </button>
           </div>
         </div>
 

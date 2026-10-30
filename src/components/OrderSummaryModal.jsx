@@ -3,7 +3,7 @@ import { restaurant } from '../data/restaurant';
 import { useCart } from '../context/CartContext';
 import DietaryBadge from './DietaryBadge';
 
-export default function WaiterModal({ isOpen, onClose }) {
+export default function OrderSummaryModal({ isOpen, onClose }) {
   const { cart, totalItems, overallTotal, formatINR, cookingNote } = useCart();
 
   if (!isOpen) return null;
@@ -12,30 +12,30 @@ export default function WaiterModal({ isOpen, onClose }) {
     <div
       role="dialog"
       aria-modal="true"
-      aria-labelledby="waiter-modal-title"
+      aria-labelledby="order-summary-title"
       className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in"
     >
       <div className="bg-white rounded-3xl p-5 w-full max-w-sm shadow-[0_12px_40px_rgba(56,34,22,0.18)] flex flex-col items-center border border-[#F0DCC2] max-h-[90vh] overflow-hidden">
-        {/* Chef Hat / Bell Badge */}
+        {/* Receipt / Order Icon Badge */}
         <div className="relative mb-3">
           <div className="w-14 h-14 rounded-full bg-[#FFF0D9] text-[#FF5A1F] border border-[#F0DCC2] flex items-center justify-center shadow-xs">
-            <span className="material-symbols-outlined text-[28px]">soup_kitchen</span>
+            <span className="material-symbols-outlined text-[28px]">receipt_long</span>
           </div>
         </div>
 
         {/* Modal Title & Notice */}
-        <h3 id="waiter-modal-title" className="text-lg font-bold text-[#382216] text-center">
-          Show to Waiter
+        <h3 id="order-summary-title" className="text-lg font-bold text-[#382216] text-center">
+          Order Summary
         </h3>
         <p className="text-xs text-[#806A58] text-center mt-1 px-2 leading-relaxed">
-          Please present this digital token to your server or waiter to fire your order directly to the kitchen.
+          Review your selected items and bill summary.
         </p>
 
-        {/* Table & Total Header Badge */}
+        {/* Order Details & Total Header Badge */}
         <div className="my-3 p-3 bg-[#FFF8EC] rounded-2xl w-full border border-[#F0DCC2] flex items-center justify-between">
           <div>
             <span className="text-sm font-extrabold text-[#C94316] tracking-wider block">
-              {restaurant.tableLabel.toUpperCase()}
+              ORDER SUMMARY
             </span>
             <span className="text-[11px] font-medium text-[#806A58]">
               {restaurant.diningContext} • {totalItems} {totalItems === 1 ? 'Item' : 'Items'}
@@ -86,7 +86,7 @@ export default function WaiterModal({ isOpen, onClose }) {
             onClick={onClose}
             className="w-full py-3 rounded-full bg-[#FF5A1F] hover:bg-[#C94316] text-white text-sm font-bold shadow-[0_8px_24px_rgba(255,90,31,0.3)] active:scale-95 transition-all cursor-pointer"
           >
-            Done with Waiter
+            Close Summary
           </button>
         </div>
       </div>

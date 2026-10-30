@@ -1,9 +1,8 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { restaurant } from '../data/restaurant';
 import { useCart } from '../context/CartContext';
 
-export default function BottomNav({ onOpenSearch, onShowTableInfo }) {
+export default function BottomNav({ onOpenSearch }) {
   const location = useLocation();
   const { totalItems } = useCart();
 
@@ -12,11 +11,11 @@ export default function BottomNav({ onOpenSearch, onShowTableInfo }) {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-40 pb-safe bg-[#FFFFFF] border-t border-[#F0DCC2] shadow-[0_-2px_12px_rgba(56,34,22,0.06)]">
-      <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-2">
+      <div className="flex items-center justify-around h-14 max-w-lg mx-auto px-4">
         {/* 1. Menu Tab */}
         <NavLink
           to="/categories"
-          className={`flex flex-col items-center justify-center min-w-[60px] h-12 gap-0.5 active:scale-95 transition-all ${
+          className={`flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 active:scale-95 transition-all ${
             isMenuActive ? 'text-[#FF5A1F] font-semibold' : 'text-[#806A58] hover:text-[#382216]'
           }`}
         >
@@ -31,7 +30,7 @@ export default function BottomNav({ onOpenSearch, onShowTableInfo }) {
           type="button"
           onClick={onOpenSearch}
           aria-label="Search Menu"
-          className="flex flex-col items-center justify-center min-w-[60px] h-12 gap-0.5 text-[#806A58] hover:text-[#382216] active:scale-95 transition-all cursor-pointer"
+          className="flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 text-[#806A58] hover:text-[#382216] active:scale-95 transition-all cursor-pointer"
         >
           <span className="material-symbols-outlined text-[20px]">search</span>
           <span className="text-[10px] tracking-tight">Search</span>
@@ -40,7 +39,7 @@ export default function BottomNav({ onOpenSearch, onShowTableInfo }) {
         {/* 3. Cart Tab */}
         <NavLink
           to="/cart"
-          className={`relative flex flex-col items-center justify-center min-w-[60px] h-12 gap-0.5 active:scale-95 transition-all ${
+          className={`relative flex flex-col items-center justify-center min-w-[64px] h-12 gap-0.5 active:scale-95 transition-all ${
             isCartActive ? 'text-[#FF5A1F] font-semibold' : 'text-[#806A58] hover:text-[#382216]'
           }`}
         >
@@ -56,17 +55,6 @@ export default function BottomNav({ onOpenSearch, onShowTableInfo }) {
           </div>
           <span className="text-[10px] tracking-tight">Cart</span>
         </NavLink>
-
-        {/* 4. Table #04 Tab */}
-        <button
-          type="button"
-          onClick={onShowTableInfo}
-          aria-label="Table info and QR details"
-          className="flex flex-col items-center justify-center min-w-[60px] h-12 gap-0.5 text-[#806A58] hover:text-[#382216] active:scale-95 transition-all cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-[20px]">qr_code_2</span>
-          <span className="text-[10px] tracking-tight">{restaurant.tableLabel}</span>
-        </button>
       </div>
     </nav>
   );

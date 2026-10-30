@@ -160,7 +160,7 @@ export default function DishListingPage() {
                 Menu Data Pending
               </h3>
               <p className="text-xs text-[#806A58] max-w-xs mx-auto leading-relaxed mb-4">
-                The {subcategory.name} items for {restaurant.name} are currently being updated by the kitchen. Please ask your waiter for available specials.
+                The {subcategory.name} items for {restaurant.name} are currently being updated by the kitchen. Please check back soon for available specials.
               </p>
               <Link
                 to={`/menu/${category.slug}`}

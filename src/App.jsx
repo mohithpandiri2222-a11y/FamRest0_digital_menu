@@ -8,8 +8,7 @@ import CartPage from './pages/CartPage';
 import Header from './components/Header';
 import BottomNav from './components/BottomNav';
 import SearchModal from './components/SearchModal';
-import WaiterModal from './components/WaiterModal';
-import TableInfoModal from './components/TableInfoModal';
+import OrderSummaryModal from './components/OrderSummaryModal';
 import { getCategoryBySlug, getSubcategoryBySlug } from './data/menu';
 import { useCart } from './context/CartContext';
 
@@ -17,8 +16,7 @@ export default function App() {
   const location = useLocation();
   const { clearCart } = useCart();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isWaiterModalOpen, setIsWaiterModalOpen] = useState(false);
-  const [isTableInfoOpen, setIsTableInfoOpen] = useState(false);
+  const [isOrderSummaryOpen, setIsOrderSummaryOpen] = useState(false);
 
   const isWelcomePage = location.pathname === '/';
 
@@ -35,7 +33,7 @@ export default function App() {
       headerTitle = category ? category.name : 'Category Listing';
     }
   } else if (pathParts[0] === 'cart') {
-    headerTitle = 'Table Order';
+    headerTitle = 'Your Cart';
   }
 
   return (
@@ -55,11 +53,11 @@ export default function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route
             path="/categories"
-            element={<MainCategoriesPage onShowTableInfo={() => setIsTableInfoOpen(true)} />}
+            element={<MainCategoriesPage />}
           />
           <Route
             path="/menu/:categorySlug"
-            element={<CategorySubcategoriesPage onShowWaiterModal={() => setIsWaiterModalOpen(true)} />}
+            element={<CategorySubcategoriesPage />}
           />
           <Route
             path="/menu/:categorySlug/:subcategorySlug"
@@ -67,20 +65,19 @@ export default function App() {
           />
           <Route
             path="/cart"
-            element={<CartPage onShowWaiterModal={() => setIsWaiterModalOpen(true)} />}
+            element={<CartPage onShowSummary={() => setIsOrderSummaryOpen(true)} />}
           />
           <Route
             path="*"
-            element={<MainCategoriesPage onShowTableInfo={() => setIsTableInfoOpen(true)} />}
+            element={<MainCategoriesPage />}
           />
         </Routes>
       </div>
 
-      {/* Bottom Navigation across all non-welcome screens (Matching Screens 2-8 in reference) */}
+      {/* Bottom Navigation across all non-welcome screens */}
       {!isWelcomePage && (
         <BottomNav
           onOpenSearch={() => setIsSearchOpen(true)}
-          onShowTableInfo={() => setIsTableInfoOpen(true)}
         />
       )}
 
@@ -90,14 +87,9 @@ export default function App() {
         onClose={() => setIsSearchOpen(false)}
       />
 
-      <WaiterModal
-        isOpen={isWaiterModalOpen}
-        onClose={() => setIsWaiterModalOpen(false)}
-      />
-
-      <TableInfoModal
-        isOpen={isTableInfoOpen}
-        onClose={() => setIsTableInfoOpen(false)}
+      <OrderSummaryModal
+        isOpen={isOrderSummaryOpen}
+        onClose={() => setIsOrderSummaryOpen(false)}
       />
     </div>
   );

@@ -68,7 +68,8 @@ const restaurantFile = fs.readFileSync('src/data/restaurant.js', 'utf8');
 assert(restaurantFile.includes('FamResto'), 'Restaurant name defined as FamResto');
 assert(!restaurantFile.includes('Nxt Resto'), 'Old Nxt Resto branding replaced in restaurant.js');
 assert(restaurantFile.includes('Good Food • Happy People'), 'Tagline defined as "Good Food • Happy People"');
-assert(restaurantFile.includes('Table #04') || restaurantFile.includes('tableNumber: "04"'), 'Table number defined as 04');
+assert(!restaurantFile.includes('tableNumber') && !restaurantFile.includes('tableLabel') && !restaurantFile.includes('Table #04'), 'Table numbers completely removed from restaurant.js');
+assert(restaurantFile.includes('Dine-in'), 'General Dine-in context preserved in restaurant.js');
 assert(restaurantFile.includes('#FFF8EC'), 'Theme contains warm ivory background #FFF8EC');
 assert(restaurantFile.includes('#FF5A1F'), 'Theme contains primary orange #FF5A1F');
 assert(restaurantFile.includes('#382216'), 'Theme contains main text warm dark brown #382216');
@@ -135,6 +136,59 @@ assert(!allDeps['@supabase/supabase-js'], 'No Supabase backend');
 assert(!allDeps['stripe'], 'No online payment processing');
 assert(!fs.existsSync('server.js'), 'No server.js');
 assert(!fs.existsSync('backend/'), 'No backend/ folder');
+
+// 9. Verify Removal of All Table Numbers and Waiter References
+console.log('\n--- 9. No Table Numbers & Waiter References Verification ---');
+function getAllSourceFiles(dir) {
+  let results = [];
+  const list = fs.readdirSync(dir);
+  list.forEach(file => {
+    const fullPath = path.join(dir, file);
+    const stat = fs.statSync(fullPath);
+    if (stat && stat.isDirectory()) {
+      if (file !== 'images' && file !== 'node_modules') {
+        results = results.concat(getAllSourceFiles(fullPath));
+      }
+    } else if (file.endsWith('.js') || file.endsWith('.jsx') || file.endsWith('.html')) {
+      results.push(fullPath);
+    }
+  });
+  return results;
+}
+
+const srcFiles = getAllSourceFiles('src').concat(['index.html']);
+let foundTableRef = [];
+let foundWaiterRef = [];
+
+const tableRegex = /\b(table\s*#?\d*|t-04|tableNumber|tableLabel|tableCode|table_restaurant)\b/i;
+const waiterRegex = /\b(waiter|server|anita)\b/i;
+
+srcFiles.forEach(file => {
+  const content = fs.readFileSync(file, 'utf8');
+  // Check lines
+  content.split('\n').forEach((line, idx) => {
+    // Ignore harmless re-exports or comments if any, but all UI text and variables must be clean
+    if (tableRegex.test(line)) {
+      foundTableRef.push(`${file}:${idx + 1}: ${line.trim()}`);
+    }
+    if (waiterRegex.test(line)) {
+      // Check if it's the re-export line in WaiterModal
+      if (!file.includes('WaiterModal.jsx')) {
+        foundWaiterRef.push(`${file}:${idx + 1}: ${line.trim()}`);
+      }
+    }
+  });
+});
+
+assert(foundTableRef.length === 0, `Zero table references in source files (found: ${foundTableRef.length})`);
+if (foundTableRef.length > 0) {
+  foundTableRef.forEach(ref => console.error(`   Found table reference: ${ref}`));
+}
+
+assert(foundWaiterRef.length === 0, `Zero waiter/server/staff references in source files (found: ${foundWaiterRef.length})`);
+if (foundWaiterRef.length > 0) {
+  foundWaiterRef.forEach(ref => console.error(`   Found waiter reference: ${ref}`));
+}
 
 console.log(`\n=== VERIFICATION RESULT: ${failedTests === 0 ? 'ALL CHECKS PASSED (100% SUCCESS) ✅' : `${failedTests} FAILURES ❌`} ===`);
 if (failedTests > 0) process.exit(1);
